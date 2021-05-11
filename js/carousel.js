@@ -152,32 +152,57 @@ function animateImages(element, element2, action) {
 }
 
 function moveLeft() {
-  if (!isMoving) {
+
+  if(!isMoving){
+    isMoving = !isMoving;
     currentIndex--;
     if (currentIndex === -1) {
       currentIndex = 4;
     }
-    isMoving = !isMoving;
-    animateImages(
-      carouselLinkedList.getIndex(0).data["data"],
-      carouselLinkedList.getIndex(0).data.previous["data"],
-      "left"
-    );
-
-    // taking appropriate image to left
     carouselLinkedList
       .getIndex(0)
-      .data.previous.previous["data"].setAttribute(
-        "style",
-        "position: absolute; left: -600px;"
+      .data.previous.data.setAttribute("style", "position: absolute; left: -600px;");
+
+      animateImages(
+        carouselLinkedList.getIndex(0).data["data"],
+        carouselLinkedList.getIndex(0).data.previous["data"],
+        "left"
       );
-    // changing left to center image
-    carouselLinkedList.getIndex(0).data =
+      carouselLinkedList.getIndex(0).data =
       carouselLinkedList.getIndex(0).data.previous;
-    console.log(currentIndex);
-    return true;
+    carouselLinkedList.getIndex(0).data.next =
+      carouselLinkedList.getIndex(0).data.next;
+    carouselLinkedList.getIndex(0).data.previous =
+      carouselLinkedList.getIndex(0).data.previous;
   }
-  return false;
+  
+  
+  // if (!isMoving) {
+  //   currentIndex--;
+  //   if (currentIndex === -1) {
+  //     currentIndex = 4;
+  //   }
+  //   isMoving = !isMoving;
+  //   animateImages(
+  //     carouselLinkedList.getIndex(0).data["data"],
+  //     carouselLinkedList.getIndex(0).data.previous["data"],
+  //     "left"
+  //   );
+
+  //   // taking appropriate image to left
+  //   carouselLinkedList
+  //     .getIndex(0)
+  //     .data.previous.previous["data"].setAttribute(
+  //       "style",
+  //       "position: absolute; left: -600px;"
+  //     );
+  //   // changing left to center image
+  //   carouselLinkedList.getIndex(0).data =
+  //     carouselLinkedList.getIndex(0).data.previous;
+  //   console.log(currentIndex);
+  //   return true;
+  // }
+  // return false;
 }
 
 function moveRight() {
@@ -187,9 +212,6 @@ function moveRight() {
     if (currentIndex === 5) {
       currentIndex = 0;
     }
-    console.log(carouselLinkedList.getIndex(0).data);
-    console.log(carouselLinkedList.getIndex(0).data.next);
-    console.log(carouselLinkedList.getIndex(0).data.previous);
     carouselLinkedList
       .getIndex(0)
       .data.next.data.setAttribute("style", "position: absolute; left: 600px;");
@@ -199,9 +221,6 @@ function moveRight() {
       carouselLinkedList.getIndex(0).data.next["data"],
       "right"
     );
-    console.log(carouselLinkedList.getIndex(0).data);
-    console.log(carouselLinkedList.getIndex(0).data.next);
-    console.log(carouselLinkedList.getIndex(0).data.previous);
 
     carouselLinkedList.getIndex(0).data =
       carouselLinkedList.getIndex(0).data.next;
